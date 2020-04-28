@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Style the header */
+        header {
+            background-color: #666;
+            padding: 30px;
+            text-align: center;
+            font-size: 35px;
+            color: white;
+        }
+
+        /* Container for flexboxes */
+        section {
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        /* Style the navigation menu */
+        nav {
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            background: #ccc;
+            padding: 20px;
+        }
+
+        /* Style the list inside the menu */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Style the content */
+        article {
+            -webkit-flex: 3;
+            -ms-flex: 3;
+            flex: 3;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+
+        /* Style the footer */
+        footer {
+            background-color: #777;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+        @media (max-width: 600px) {
+            section {
+                -webkit-flex-direction: column;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>관리자 로그인</h2>
+    </header>
+    
+
+    <section>
+        <nav>
+            <ul>
+                <li><a id="join_a">관리자 등록</a></li>
+                <li><a id="login_a">관리자 접속</a></li>
+                <li><a id="signin_a">사용자 등록</a></li>
+                <li><a id="signup_a">사용자 접속</a></li>
+                <li><a id="lotto_a">로또</a></li>
+            </ul>
+        </nav>
+
+        <article>
+
+            <form action="#">
+                <label>로그인</label> <br>
+                <input id="userid" type="text"> <br>
+                <label>비밀번호 </label><br>
+                <input id="password" type="text"><br>
+                <input id="login-button" type="button" value="로그인">
+                <input id="cancl-Button" type="button" value="취소">
+
+            </form>
+
+
+        </article>
+    </section>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+    <script>
+        $('#join_a')
+            .css('curser', 'pointer')
+            .click(e => {
+                e.preventDefault()
+                location.href = 'member/join.html'
+            })
+
+        $('#login_a')
+            .click(e => {
+                e.preventDefault()
+                location.href = 'index.html'
+            })
+
+
+        $('#login-button').click(e => {
+            e.preventDefault()
+            let member = {
+                userId: $('#userid').val(),
+                password: $('#password').val()
+            }
+
+            $.ajax({
+                url: '/member/login',
+                type: 'post',
+                data: JSON.stringify(member),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    if (d === 'SUCCESS') {
+                       location.href = "member/list.html"
+                    } else {
+                        alert('다시로그인 해주세요.')
+                        location.href = "index.html"
+
+                    }
+                },
+                error: (request, status, error) => {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error)
+                }
+            })
+        })
+
+        $('#cancel-button').click(e => {
+            e.preventDefault()
+            $ajax({
+                url: '/member',
+                type: 'post',
+                data: JSON.stringify(member),
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+        })
+
+        $('#signin_a').click(e =>{
+            location.href = "user/signup.html"
+        })
+
+        $('#signup_a').click(e =>{
+                location.href = "user/signin.html"
+            } )
+        
+        $('#lotto_a').click(e =>{
+            location.href = 'lotto/bay.html'
+        })
+
+        
+    </script>
+</body>
+
+</html>

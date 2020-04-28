@@ -11,7 +11,8 @@
 	<groupId>com.occamsrazor</groupId>
 	<artifactId>web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>occamsrazor-1</name>
+	<packaging>war</packaging>
+	<name>occamsrazor</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -38,6 +39,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
