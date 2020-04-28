@@ -1,5 +1,9 @@
 package com.occamsrazor.web.admin;
 
+
+
+
+
 public interface AdminService {
 	
 	public void add(Admin member);
@@ -15,5 +19,6 @@ public interface AdminService {
 	public int genderCount(String gender);
 	public void update(Admin member);
 	public void delete(Admin member);
+
 	
 }

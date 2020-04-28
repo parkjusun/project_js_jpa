@@ -147,7 +147,34 @@
 
 
         })
-       
+
+        $('#useridCheck').click(e => {
+            e.preventDefault
+            $.getJSON('/user/idCheck/' + $('#userid').val(), d => {
+
+                alert((d === 'SUCCESS') ? '사용가능한 아이디 입니다.' : '중복된 아이디 입니다.')
+
+            })
+            /*
+            $.ajax({
+                url: '/user/idCheck/' + $('#userid').val(),
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    if (d === 'SUCCESS') {
+                       alert('중복된 아이디 입니다.')
+                    } else {
+                        alert('사용가능한 아이디 입니다.')
+                    }
+                },
+                error: (r, s, e) => {
+                    alert(r + "/n" + s + "/n" + e)
+                }
+            })*/
+        })
+
+
     </script>
 </body>
 
