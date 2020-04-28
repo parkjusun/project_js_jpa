@@ -28,7 +28,6 @@ public class UserController {
 	public Messenger add(@RequestBody User user) {
 		userSevice.add(user);
 		int count = userSevice.count();
-
 		return (userSevice.count() == count +1)? Messenger.SUCCESS : Messenger.FAIL;
 	}
 	
@@ -67,5 +66,8 @@ public class UserController {
 		System.out.println("delet 정보 :"+userid);
 		return (userSevice.remove(userid))? Messenger.SUCCESS : Messenger.FAIL;
 	}
+	
+	
+	
 	
 }

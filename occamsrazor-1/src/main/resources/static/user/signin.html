@@ -120,6 +120,8 @@
                 contentType: 'application/json',
                 success: d => {
                     if (d.messenger === 'SUCCESS') {
+                        console.log('LOGIN RESULT :'+d);
+                        
                         sessionStorage.setItem('userid', d.user.userId)
                         location.href = 'mypage.html'
 
