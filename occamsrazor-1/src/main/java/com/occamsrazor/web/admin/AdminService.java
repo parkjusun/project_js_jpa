@@ -1,9 +1,5 @@
 package com.occamsrazor.web.admin;
 
-
-
-
-
 public interface AdminService {
 	
 	public void add(Admin member);

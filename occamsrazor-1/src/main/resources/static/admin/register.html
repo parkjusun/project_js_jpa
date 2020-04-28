@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<style>
+	html,
+	body {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		min-height: 100%;
+	}
+
+	.border_black {
+		border: 1px solid black;
+	}
+
+	.center {
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.width_full {
+		width: '100%';
+		height: '100%'
+	}
+</style>
+
+<body>
+	<table id="admin">
+
+		<tr id="tr_1">
+			<td rowspan="4">
+				<img src="http://www.cdc.go.kr/cdc/img/main/h1_logo.png">
+			</td>
+			<td>
+				<label>이름</label>
+			</td>
+			<td>
+				<input id="name" type="text" />
+			</td>
+		<tr>
+			<td>
+				<label>직급</label>
+			</td>
+			<td>
+				<input id="position" type="text" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>이메일</label>
+			</td>
+			<td>
+				<input id="email" type="text" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>전화번호</label>
+			</td>
+			<td>
+				<input id="phoneNumber" type="text" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input id="img" type="button" value="이미지 등록하기" />
+			</td>
+			<td colspan="2">
+				<input id="userid" type="button" value="등록하기" />
+				<input id="userid" type="button" value="취소하기" />
+			</td>
+		</tr>
+	</table>
+
+	<script>
+		$('#admin').css({ width: '80%', height: '600px' }).addClass('border_black center')
+		$('#admin td').addClass('border_black', 'width_full')
+
+	</script>
+</body>
+
+</html>
