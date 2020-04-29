@@ -57,7 +57,6 @@
 					<tr style="width: 80%;height: 50px;">
 						<td rowspan="4">
 							<img src="https://visualpharm.com/assets/314/Admin-595b40b65ba036ed117d36fe.svg" style="height: 100%; width: 100%;">
-							
 						</td>
 						<td style="height: 20%">
 							<label>이름</label>
@@ -110,25 +109,8 @@
 		$('#kcdc td').addClass('border_black', 'width_full')
 		$('#register_a').css({color:'blue',cursor:'none','text-decoration':'none'})
 	
-		$('#admin_join').click(e=>{
-			$.ajax({
-				url:'/admins/register',
-				type:'post',
-				data:JSON.stringify({
-					name: $('#name').val(),
-					position: $('#position').val(),
-					email: $('#email').val(),
-					phoneNumber: $('#phoneNumber').val(),
-				}),
-				dataType:'json',
-				contentType:'application/json',
-				success:d=>{
-					location.href = 'access.html'
-				},
-				error: (r,x,e) =>{
-					alert(r.state)
-				}
-			})
+		$.getJSON('/admins/'+'1234',d=>{
+			
 		})
 	</script>
 </body>

@@ -1,20 +1,15 @@
 package com.occamsrazor.web.admin;
 
+import java.util.List;
+
 public interface AdminService {
 	
-	public void add(Admin member);
-	public Admin[] list();
-	public Admin[] searchByName(String name);
-	public Admin searchByGender(String gender);
-	public Admin detail(String userid);
-	public int count();
-	
-	public boolean login(Admin member);
-	
-	public int samCount(String name);
-	public int genderCount(String gender);
-	public void update(Admin member);
-	public void delete(Admin member);
+	public void register(Admin Admin);
+	public  List<Admin> list();
+	public Admin findOne(String employNumber);
+	public void modify(Admin admin);
+	public void remove(Admin admin);
+
 
 	
 }
