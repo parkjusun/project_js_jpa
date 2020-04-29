@@ -4,8 +4,6 @@ import lombok.Data;
 
 @Data
 public class Admin {
-	public String employNumber, passwd, name ,position, profile, email , phoneNumber,registerDate;
-	
-
-	
+	public String employNumber, passwd, name ,position, profile, email , phoneNumber, registerDate;
 }
+
