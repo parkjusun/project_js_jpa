@@ -24,7 +24,6 @@ public class AdminDaoimpl implements AdminDao {
 			writer.flush();
 		} catch (Exception e) {
 			System.out.println(Messenger.FILE_INSERT_ERROR);
-
 		} 
 	}
 

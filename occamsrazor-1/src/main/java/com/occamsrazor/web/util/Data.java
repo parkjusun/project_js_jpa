@@ -14,6 +14,7 @@ public enum Data {
 					+ File.separator + "repository3" + File.separator + "occamsrazor-1" + File.separator + "src"
 					+ File.separator + "main" + File.separator + "resources" + File.separator + "static"
 					+ File.separator + "user"+ File.separator ;
+			
 			break;
 
 		case ADMIN_PATH:

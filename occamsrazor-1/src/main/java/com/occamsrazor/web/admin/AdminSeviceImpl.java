@@ -15,13 +15,9 @@ public class AdminSeviceImpl implements AdminService {
 
 	@Override
 	public void register(Admin admin) {
-
 		admin.setEmployNumber(creatEmployNumber());
 		admin.setPasswd("1");
 		admin.setRegisterDate(creatRegisterDate());
-
-		System.out.println(admin.toString());
-
 		adminDao.insert(admin);
 	}
 
@@ -50,16 +46,18 @@ public class AdminSeviceImpl implements AdminService {
 	}
 
 	public String creatEmployNumber() {
+		int count = 0;
+		String[] ranIdexs = new String[count];
 		String ranIdex = "";
 
 		for (int i = 0; i < 4; i++) {
-			ranIdex += (int) Math.random() * 10;
+			ranIdex += String.valueOf((int)(Math.random() * 10));
 		}
 		
 //		for (int i = 0; i < 9000; i++) {
 //			ranIdex = new Random().nextInt(i) + 1000;
 //		}
-//		ranIdex = (int) (Math.random() * 8999) + 1001;
+//		ranIdex = (int)(Math.random() * 9000) + 1000;
 
 		return ranIdex;
 	}

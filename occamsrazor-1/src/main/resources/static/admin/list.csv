@@ -1,3 +1,7 @@
-Admin(employNumber=null, passwd=null, name=d, position=d, profile=null, email=d, phoneNumber=d, registerDate=null)
-Admin(employNumber=null, passwd=null, name=a, position=a, profile=null, email=a, phoneNumber=a, registerDate=null)
-4548,1,a,a,null,a,a,2020-57-29
+2440,1,이순신,과장,null,lee@gmail.com,010-0001-0002,2020-20-29
+9920,1,김유신,팀장,null,kim@gmail.com,010-0002-0003,2020-20-29
+8966,1,유관순,사원,null,you@gmail.com,010-0003-0004,2020-21-29
+9001,1,박주선,사원,null,park@gmail.com,010-0005-0006,2020-46-29
+9536,1,,,null,,,2020-07-01
+0142,1,,,null,,,2020-07-01
+5779,1,a,a,null,a,a,2020-07-01
