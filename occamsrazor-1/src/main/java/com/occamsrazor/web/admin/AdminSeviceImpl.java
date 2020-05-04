@@ -62,7 +62,7 @@ public class AdminSeviceImpl implements AdminService {
 		return ranIdex;
 	}
 
-	public String creatRegisterDate() {
+	private String creatRegisterDate() {
 
 		return new SimpleDateFormat("yyyy-mm-dd").format(new java.util.Date());
 	}

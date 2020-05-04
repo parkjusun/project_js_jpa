@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>사용자 페이지</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<link rel="stylesheet" herf="/resources/css/global.css">
+    <link rel="stylesheet" href="/resources/css/global.css" />
+    <script type="text/javascript" src="/resources/js/user.js"></script>
+    <script type="text/javascript" src="/resources/js/admin.js"></script>
 </head>
 
 <body>
@@ -15,21 +17,25 @@
                 <img src="http://www.cdc.go.kr/cdc/img/main/h1_logo.png">
             </td>
             <td colspan="2">
-                <input id="search" type="text"> <input id="search-button" type="button" value="검색"><br>
+                <input id="search" style="width:500px;height:50px;float:left;margin-left:50px" type="text">
+                <input id="search_button"
+                    style="width:150px;height:50px;float:left;margin-left:50px;background-color: #80003e; color: white"
+                    type="button" value="검색"> <br>
             </td>
             <td>
-                <input id="login-button" type="button" value="로그인">
-                <input id="join-button" type="button" value="회원가입">
-                <input id="regyster_button" type="button" value="관리자 등록"">
-                <input id="acceess_button" type="button" value="관리자 접속">
+                <a id="login_a" style="cursor:pointer;text-decoration: underline">회원가입</a>
+                <a id="join_a" style="cursor:pointer;text-decoration: underline">로그인</a>
+                <a id="register_a" style="cursor:pointer;text-decoration: underline">관리자 등록</a>
+                <a id="access_a" style="cursor:pointer;text-decoration: underline">관리자 접속</a>
+
             </td>
         </tr>
-        <tr id="menu_1">
+        <tr id="menu">
             <td colspan="4">
             </td>
         </tr>
         <tr>
-            <td colspan="4">
+            <td id="content" colspan="4">
                 <img src="http://www.cdc.go.kr/cdc/img/main/visual_default_main_01.jpg">
             </td>
         </tr>
@@ -52,28 +58,9 @@
             </td>
         </tr>
     </table>
-
-
-    <footer>
-        <p>Footer</p>
-    </footer>
-
     <script>
-        $('#kcdc').css({ width: '80%', height: '900px' }).addClass('border_black center')
-        $('#tr_1').css({ width: '80%', height: '50px' }).addClass('border_black center')
-        $('#menu_1').css({ width: '80%', height: '50px' }).addClass('border_black center')
-        $('#kcdc td').addClass('border_black', 'width_full')
-
-        $('#regyster_button').click( e=>{
-            e.preventDefault
-            location.href = "admin/register.html"
-        })
-
-        $('#acceess_button').click(e=>{
-            $.ajax({
-            })
-        })
-
+        user.init()
+        
     </script>
 </body>
 
