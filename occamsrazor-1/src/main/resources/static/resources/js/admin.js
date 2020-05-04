@@ -4,7 +4,10 @@
 var admin = admin || {}
 
 admin = (() => {
+    const WHEN_ERROR = `호출하는 JS 파일을 찾지 못했습니다.`
+    let detail_vue
     let init = () => {
+        detail_vue = `/resources/vue/detail_vue.js`
         onCreate()
     }
     let onCreate = () => {
@@ -49,9 +52,9 @@ admin = (() => {
                             </td>
                             
                         </tr>`).appendTo('#userData')
-                        
-                        // 리스트 갯수 저장
-                        reset = d.length;
+
+                    // 리스트 갯수 저장
+                    reset = d.length;
 
                     $(`<a>${j.name}</a>`)
                         .css({ cursor: 'pointer', color: 'blue' })
@@ -101,7 +104,7 @@ admin = (() => {
             $("#ssn").text('직급')
             $.getJSON('/admins/list', d => {
                 $('#totalCount').text('총회원수 : ' + d.length)
-                
+
                 //리스트 초기화
                 for (let z = 0; z < reset; z++) {
                     $("#list_" + (z)).remove()
@@ -131,42 +134,52 @@ admin = (() => {
                             </td>
 
                         </tr>`).appendTo('#userData')
-                        
-                        // 리스트 갯수 저장
-                        reset = d.length;
+                    // 리스트 갯수저장 
+                    reset = d.length;
 
                     $(`<a>${j.name}</a>`)
                         .css({ cursor: 'pointer', color: 'blue' })
                         .appendTo("#user_" + (i + 1))
                         .click(e => {
-                            for (let z = 0; z < d.length + 1; z++) {
-                                $("#list_" + (z)).remove()
-                            }
+                            $.when(
+                                $.getScript(detail_vue)
+                            ).done(() => {
+                                setContentView()
+                                $('#register_a').click(e => {
+                                    $('#userData').empty()
+                                    $('#userData').html(detailVue.detail())
+                                })
+                            }).fail(() => {
+                                alert(WHEN_ERROR)
+                            })
+                            //     for (let z = 0; z < d.length + 1; z++) {
+                            //         $("#list_" + (z)).remove()
+                            //     }
 
-                            $(`<tr id="list_` + (i) + `">
-                        	<td>
-                                <span>${i + 1}</span>
-                            </td>
-                            <td>
-                                <span>${j.employNumber}</span>
-                            </td>
-                            <td>
-                                <span>${j.name}</span>
-                            </td>
-                             <td>
-                                <span>${j.position}</span>
-                            </td>
-                           <td>
-                                <span>${j.email}</span>
-                            </td>
-                            <td>
-                                <span>${j.phoneNumber}</span>
-                            </td>
-                            <td>
-                                <span>${j.registerDate}</span>
-                            </td>
+                            //     $(`<tr id="list_` + (i) + `">
+                            // 	<td>
+                            //         <span>${i + 1}</span>
+                            //     </td>
+                            //     <td>
+                            //         <span>${j.employNumber}</span>
+                            //     </td>
+                            //     <td>
+                            //         <span>${j.name}</span>
+                            //     </td>
+                            //      <td>
+                            //         <span>${j.position}</span>
+                            //     </td>
+                            //    <td>
+                            //         <span>${j.email}</span>
+                            //     </td>
+                            //     <td>
+                            //         <span>${j.phoneNumber}</span>
+                            //     </td>
+                            //     <td>
+                            //         <span>${j.registerDate}</span>
+                            //     </td>
 
-                        </tr>`).appendTo('#userData')
+                            // </tr>`).appendTo('#userData')
 
 
                         })
