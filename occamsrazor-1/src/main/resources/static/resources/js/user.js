@@ -43,21 +43,6 @@ user = (()=>{
 					e.preventDefault
 					alert('성공')
 					location.href = '/admin'
-					// $.ajax({
-					// 	url: '/admin/login',
-					// 	type: 'post',
-					// 	data: JSON.stringify({
-					// 		userid: ('#userid').val(),
-					// 		passwd: ('#passwd').val()
-					// 	}),
-					// 	dataType:'json',
-					// 	constentType:'application/json',
-					// 	sucees:d => {},
-					// 	error: (r,x,e) =>{
-					// 		alert(r.staturs)
-					// 	}
-
-					// })
 				})
 
 				$('#cancel_button').click(e=>{

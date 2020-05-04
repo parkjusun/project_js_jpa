@@ -38,8 +38,7 @@ public class UserDaoImpl implements UserDao {
 		List<User> list = new ArrayList<>();
 		List<String> temp = new ArrayList<>();
 		try {
-			File file = new File(Data.ADMIN_PATH + "user_list.csv");
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(Data.ADMIN_PATH + "user_list.csv"));
 			String message = "";
 			while ((message = reader.readLine())!=null) {
 				temp.add(message);

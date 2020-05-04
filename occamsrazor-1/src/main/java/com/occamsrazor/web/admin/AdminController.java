@@ -28,6 +28,7 @@ public class AdminController {
 	
 	@GetMapping("/list")
 	public List<Admin> list(){
+		System.out.println("aaa");
 		return adminService.list();
 	}
 	
