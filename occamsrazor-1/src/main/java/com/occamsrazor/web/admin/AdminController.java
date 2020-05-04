@@ -26,7 +26,7 @@ public class AdminController {
 		return Messenger.SUCCESS;
 	}
 	
-	@GetMapping("")
+	@GetMapping("/list")
 	public List<Admin> list(){
 		return adminService.list();
 	}
