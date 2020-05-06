@@ -21,26 +21,27 @@ admin = (() => {
             $("#adminList").removeClass('active')
             $("#userList").removeClass('active')
             $("#lostItem").addClass('active')
+            
             $('#userData').html(`
-            <tr id="userDetail">
-                            <td>
+            <tr id="userDetail" >
+                            <th>
                                 <a id="index">index.</a>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <a id="itemName">id</a>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <a id="itemName">itemName</a>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <a id="itemRegisterDate">itemRegisterDate</a>
-                            </td>
-                             <td>
+                            </th>
+                             <th>
                                 <a id="classify">classify</a>
-                            </td>
-                           <td>
+                            </th>
+                           <th>
                                 <a id="location">location</a>
-                            </td>
+                            </th>
                   </tr> `)
 
             $.getJSON('/lostItem/list', d => {

@@ -19,7 +19,7 @@ public class LossDaoServiceImpl implements LossDaoService {
 		List<Loss> list = new ArrayList<>();
 		List<String> temp = new ArrayList<>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File(Data.ADMIN_PATH.toString()+ "items2.csv")));
+			BufferedReader reader = new BufferedReader(new FileReader(new File(Data.ADMIN_PATH.toString()+ "items.csv")));
 			String message = "";
 			while ((message = reader.readLine())!=null) {
 				temp.add(message);
