@@ -1,26 +1,52 @@
-
 "use strict"
 
 var admin = admin || {}
 
 admin = (() => {
     const WHEN_ERROR = `호출하는 JS 파일을 찾지 못했습니다.`
-    let detail_vue
+    let detailVue
+    let lostVue
+    let reset
+
     let init = () => {
-        detail_vue = `/resources/vue/detail_vue.js`
+        reset = 0;
+        detailVue = `/resources/vue/detail_vue.js`
+        lostVue = `/resources/vue/lost_vue.js`
         onCreate()
     }
     let onCreate = () => {
-        let reset = 0;
         setContentView()
 
-        $('#userList').click(e => {
-            $("#userList").addClass('active')
+        $('#lostItem').click(e => {
             $("#adminList").removeClass('active')
-            $("#userid").text('아이디')
-            $("#ssn").text('주민번호')
-            $.getJSON('/users/list', d => {
-                $('#totalCount').text('총회원수 : ' + d.length)
+            $("#userList").removeClass('active')
+            $("#lostItem").addClass('active')
+            $('#userData').html(`
+            <tr id="userDetail">
+                            <td>
+                                <a id="index">index.</a>
+                            </td>
+                            <td>
+                                <a id="itemName">id</a>
+                            </td>
+                            <td>
+                                <a id="itemName">itemName</a>
+                            </td>
+                            <td>
+                                <a id="itemRegisterDate">itemRegisterDate</a>
+                            </td>
+                             <td>
+                                <a id="classify">classify</a>
+                            </td>
+                           <td>
+                                <a id="location">location</a>
+                            </td>
+                  </tr> `)
+
+            $.getJSON('/lostItem/list', d => {
+                console.log('aaa');
+
+                $('#totalCount').text('물품수 : ' + d.length)
                 // 초기화
                 for (let z = 0; z < reset; z++) {
                     $("#list_" + z).remove()
@@ -29,6 +55,57 @@ admin = (() => {
                 $.each(d, (i, j) => {
 
                     $(`<tr id="list_` + (i) + `">
+                            <td>
+                                <span>${i + 1}</span>
+                            </td>
+                            <td>
+                                 <span>${j.index}</span>
+                            </td>
+                            <td>
+                                 <span>${j.itemName}</span>
+                            </td>
+                            <td>
+                               <span>${j.itemRegisterDate}</span>
+                            </td>
+                             <td>
+                                <span>${j.classify}</span>
+                            </td>
+                           <td>
+                               <span>${j.location}</span>
+                            </td>
+                        </tr>`).appendTo('#userData')
+
+                    // 리스트 갯수 저장
+                    reset = d.length;
+                    console.log(reset);
+
+
+                })
+            })
+
+        })
+
+        $('#userList').click(e => {
+            $("#userList").addClass('active')
+            $("#adminList").removeClass('active')
+            $("#lostItem").removeClass('active')
+            $('#LostData').empty()
+            $("#userid").text('아이디')
+            $("#ssn").text('주민번호')
+            $("#content_container").remove()
+            $.when(
+                $.getScript(detailVue)
+            ).done(() => {
+                $.getJSON('/users/list', d => {
+                    $('#totalCount').text('총회원수 : ' + d.length)
+                    // 초기화
+                    for (let z = 0; z < reset; z++) {
+                        $("#list_" + z).remove()
+                    }
+                    //리스트 표시
+                    $.each(d, (i, j) => {
+
+                        $(`<tr id="list_` + (i) + `">
                         	<td>
                                 <span>${i + 1}</span>
                             </td>
@@ -53,64 +130,65 @@ admin = (() => {
                             
                         </tr>`).appendTo('#userData')
 
-                    // 리스트 갯수 저장
-                    reset = d.length;
-
-                    $(`<a>${j.name}</a>`)
-                        .css({ cursor: 'pointer', color: 'blue' })
-                        .appendTo("#user_" + (i + 1))
-                        .click(e => {
-                            for (let z = 0; z < d.length + 1; z++) {
-                                $("#list_" + (z)).remove()
-                            }
-
-                            $(`<tr id="list_` + (i) + `">
-                        	<td>
-                                <span>${i + 1}</span>
-                            </td>
-                            <td>
-                                <span>${j.userId}</span>
-                            </td>
-                            <td>
-                                <span>${j.name}</span>
-                            </td>
-                             <td>
-                                <span>${j.ssn}</span>
-                            </td>
-                           <td>
-                                <span>${j.email}</span>
-                            </td>
-                            <td>
-                                <span>${j.phoneNumber}</span>
-                            </td>
-                            <td>
-                                <span>${j.registerDate}</span>
-                            </td>
-                            
-                        </tr>`).appendTo('#userData')
+                        // 리스트 갯수 저장
+                        reset = d.length;
+                        console.log(reset);
 
 
-                        })
+                        $(`<a>${j.name}</a>`)
+                            .css({ cursor: 'pointer', color: 'blue' })
+                            .appendTo("#user_" + (i + 1))
+                            .click(e => {
+                                $('#userData').empty()
+                                $(userVue.detail()).appendTo('#userData')
+                                $.getJSON('/users/${j.userId}', d => {
+                                    $('#userId').text(d.userId),
+                                        $('#name').text(d.name),
+                                        $('#userSSN').text(d.ssn),
+                                        $('#userAddr').text(d.addr),
+                                        $('#userEmail').text(d.email),
+                                        $('#userPhoneNumber').text(d.phoneNumber),
+                                        $('#registerDate').text(d.registerDate)
+
+                                })
 
 
+                            })
+
+
+                    })
                 })
+            }).fail(() => {
+                alert(WHEN_ERROR)
             })
+
         })
+
+
+
+
         $('#adminList').click(e => {
             $("#adminList").addClass('active')
             $("#userList").removeClass('active')
+            $("#lostItem").removeClass('active')
+            $('#LostData').empty()
+            $("#content_container").remove()
             // 리스트 이름 변경
             $("#userid").text('사원번호')
             $("#ssn").text('직급')
-            $.getJSON('/admins/list', d => {
-                $('#totalCount').text('총회원수 : ' + d.length)
+            $.when(
+                $.getScript(detailVue)
+            ).done(() => {
+                $.getJSON('/admins/list', d => {
+                    $('#totalCount').text('총회원수 : ' + d.length)
 
-                //리스트 초기화
-                for (let z = 0; z < reset; z++) {
-                    $("#list_" + (z)).remove()
-                }
-                $.each(d, (i, j) => {
-                    $(`<tr id="list_` + (i) + `">
+                    //리스트 초기화
+                    for (let z = 0; z < reset; z++) {
+                        $("#list_" + (z)).remove()
+                    }
+
+                    $.each(d, (i, j) => {
+                        $(`<tr id="list_` + (i) + `">
                         	<td>
                                 <span>${i + 1}</span>
                             </td>
@@ -134,62 +212,45 @@ admin = (() => {
                             </td>
 
                         </tr>`).appendTo('#userData')
-                    // 리스트 갯수저장 
-                    reset = d.length;
+                        // 리스트 갯수저장 
+                        reset = d.length;
+                        console.log(reset);
 
-                    $(`<a>${j.name}</a>`)
-                        .css({ cursor: 'pointer', color: 'blue' })
-                        .appendTo("#user_" + (i + 1))
-                        .click(e => {
-                            $.when(
-                                $.getScript(detail_vue)
-                            ).done(() => {
-                                setContentView()
-                                $('#register_a').click(e => {
-                                    $('#userData').empty()
-                                    $('#userData').html(detailVue.detail())
+                        $(`<a>${j.name}</a>`)
+                            .css({ cursor: 'pointer', color: 'blue' })
+                            .appendTo("#user_" + (i + 1))
+                            .click(e => {
+                                $('#userData').empty()
+                                $(userVue.detail()).appendTo('#userData')
+                                $.getJSON('/users/${j.userId}', d => {
+                                    $('#userId').text(d.userId),
+                                        $('#name').text(d.name),
+                                        $('#userSSN').text(d.ssn),
+                                        $('#userAddr').text(d.addr),
+                                        $('#userEmail').text(d.email),
+                                        $('#userPhoneNumber').text(d.phoneNumber),
+                                        $('#registerDate').text(d.registerDate)
+
                                 })
-                            }).fail(() => {
-                                alert(WHEN_ERROR)
+
+
+
                             })
-                            //     for (let z = 0; z < d.length + 1; z++) {
-                            //         $("#list_" + (z)).remove()
-                            //     }
-
-                            //     $(`<tr id="list_` + (i) + `">
-                            // 	<td>
-                            //         <span>${i + 1}</span>
-                            //     </td>
-                            //     <td>
-                            //         <span>${j.employNumber}</span>
-                            //     </td>
-                            //     <td>
-                            //         <span>${j.name}</span>
-                            //     </td>
-                            //      <td>
-                            //         <span>${j.position}</span>
-                            //     </td>
-                            //    <td>
-                            //         <span>${j.email}</span>
-                            //     </td>
-                            //     <td>
-                            //         <span>${j.phoneNumber}</span>
-                            //     </td>
-                            //     <td>
-                            //         <span>${j.registerDate}</span>
-                            //     </td>
-
-                            // </tr>`).appendTo('#userData')
 
 
-                        })
-
+                    })
 
                 })
 
+
+            }).fail(() => {
+                alert(WHEN_ERROR)
             })
 
+
+
         })
+
 
 
     }

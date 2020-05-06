@@ -30,9 +30,7 @@ public enum Data {
 			break;
 		case LIST:
 			retuneValue = "admin_list";
-
 		case USERLIST:
-
 			retuneValue = "user_list";
 
 			break;

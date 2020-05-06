@@ -38,7 +38,7 @@ public class AdminDaoimpl implements AdminDao {
 		List<Admin> list = new ArrayList<>();
 		List<String> temp = new ArrayList<>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(Data.ADMIN_PATH + "admin_list.csv"));
+			BufferedReader reader = new BufferedReader(new FileReader(Data.ADMIN_PATH + "admins.csv"));
 			String message = "";
 			while ((message = reader.readLine())!=null) {
 				temp.add(message);

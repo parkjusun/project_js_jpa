@@ -37,19 +37,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{userId}")
-	public User detail(@PathVariable String userid) {
-		return userService.fideOne(userid);
+	public User detail(@PathVariable String userId) {
+		return userService.fideOne(userId);
 	}
 	
-	@PutMapping("/{userId}")
-	public Messenger put(@RequestBody User user) {
-		userService.modify(user);
-		return Messenger.SUCCESS;
-	}
 	
-	@DeleteMapping("/{userId}")
-	public Messenger delet(@RequestBody User user) {
-		userService.remove(user);
-		return Messenger.SUCCESS;
-	}
 }

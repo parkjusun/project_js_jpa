@@ -19,17 +19,6 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void insert(User user) {
-//		try {
-//			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(Data.ADMIN_PATH.toString()+Data.USER_PATH+Data.CSV),true));
-//			writer.write(user.toString());
-//			writer.newLine();
-//			writer.flush();
-//			System.out.println("aaa");
-//		
-//		} catch (Exception e) {
-//			System.out.println(Messenger.FILE_INSERT_ERROR);
-//		}
-		
 		
 	}
 
@@ -38,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 		List<User> list = new ArrayList<>();
 		List<String> temp = new ArrayList<>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(Data.ADMIN_PATH + "user_list.csv"));
+			BufferedReader reader = new BufferedReader(new FileReader(Data.ADMIN_PATH + "users.csv"));
 			String message = "";
 			while ((message = reader.readLine())!=null) {
 				temp.add(message);
@@ -71,8 +60,18 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User selectOne(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		User findeUser = new User();
+		List<User> list = selectAll();
+		for(User u : list) {
+			if (userid.equals(u.getUserId())) {
+				findeUser = u;
+				break;
+			}
+		}
+		
+		
+		
+		return findeUser;
 	}
 
 	@Override
